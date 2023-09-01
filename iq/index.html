@@ -26,6 +26,18 @@
             cursor: pointer;
             /* 添加指针样式以指示图片可点击 */
         }
+
+        /* 提示框样式 */
+        .copy-success {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #66c066;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -33,15 +45,43 @@
     <div class="image-container">
         <!-- JavaScript将会在这里动态添加图片 -->
     </div>
+    <div class="copy-success" id="copySuccess">
+        复制成功！快去博客评论吧。
+    </div>
     <script>
         // JavaScript脚本
         document.addEventListener("DOMContentLoaded", function () {
             const imageContainer = document.querySelector(".image-container");
+            const copySuccess = document.getElementById("copySuccess");
 
             for (let i = 1; i <= 65; i++) {
                 const img = document.createElement("img");
-                img.src = `/iq/${i}.png`;
+                // img.src = `/iq/${i}.png`;
+                img.src = `${i}.png`;
                 img.alt = `Image ${i}`;
+                img.addEventListener("click", function () {
+                    // 创建一个新的img元素
+                    const copiedImg = document.createElement("img");
+                    copiedImg.src = img.src;
+                    copiedImg.className = "tk-owo-emotion";
+
+                    // 将复制的图片添加到剪贴板
+                    const clipboard = navigator.clipboard;
+                    clipboard.writeText(copiedImg.outerHTML)
+                        .then(function () {
+                            console.log("图片已复制到剪贴板");
+                            // 显示复制成功提示框
+                            copySuccess.style.display = "block";
+
+                            // 隔一段时间后隐藏提示框
+                            setTimeout(function () {
+                                copySuccess.style.display = "none";
+                            }, 2000); // 2秒后隐藏
+                        })
+                        .catch(function (err) {
+                            console.error("复制图片失败: ", err);
+                        });
+                });
                 imageContainer.appendChild(img);
             }
 
