@@ -69,7 +69,9 @@
                     // 创建一个新的img元素
                     const copiedImg = document.createElement("img");
                     copiedImg.src = img.src;
-                    copiedImg.className = "tk-owo-emotion";
+                    copiedImg.style.cssText = 'height: 2.25em!important;';
+                    // copiedImg.style = '.wl-content .vemoji, .wl-content .wl-emoji {height: 2.25em!important;}';
+                    copiedImg.className = "tk-owo-emotion  wl-emoji";
 
                     // 将复制的图片添加到剪贴板
                     const clipboard = navigator.clipboard;
