@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表情包展示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* 共享样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* 新的 .box 样式，适配手机和电脑 */
+        .box {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            /* 卡片之间的间距 */
+            top: 6rem;
+
+        }
+
+        header {
+            top: 0;
+            transition: .2s;
+            position: fixed;
+            z-index: 91;
+            /* position: relative; */
+            margin: 0 auto;
+            text-align: center;
+            top: 0;
+            z-index: 1002;
+            align-items: center;
+            /* padding: 0 24px; */
+            /* max-width: 2560px; */
+            /* width: 75%; */
+            width: 80%;
+            height: 64px;
+            display: flex;
+            -webkit-user-select: none;
+            background: #e98b8b9d;
+            border-radius: 0 0 15px 15px;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            justify-content: space-between;
+            padding: 0px 2rem;
+
+        }
+
+        .title {
+            position: sticky;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .title a {
+            color: #ffffff;
+        }
+
+        body.swal2-height-auto {
+            height: 100vh !important;
+        }
+
+        .card {
+            width: 300px;
+            height: 200px;
+            border: 3px solid rgb(227, 175, 175);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background-repeat: no-repeat, no-repeat;
+            backdrop-filter: blur(10px);
+            float: left;
+            background-color: #ffeeee;
+            box-shadow: 0px 5px 16px 0px #e1c4c4;
+        }
+
+        .card h1 {
+            text-align: center;
+            line-height: 100px;
+            font-size: 24px;
+        }
+
+        /* IQ表情包样式 */
+        .iq-card {
+            background-image: url("/iq/1.png");
+            background-size: cover;
+
+            background-image: url(/iq/1.png), url(/iq/2.png);
+            background-size: 40%;
+            background-position: -15% -15%, 115% 115%;
+            background-position: -8% 120%, 110% 120%;
+
+        }
+
+        /* 小白表情包样式 */
+        .bai-card {
+            /* background-image: url("/bai/1.png");
+            background-size: cover; */
+            background-image: url(/bai/1.png), url(/bai/2.png);
+            background-size: 40%;
+            background-position: 0 100%, 100% 100%;
+            background-position: -8% 106%, 110% 100%;
+
+        }
+
+        /* long表情包样式 */
+        .long-card {
+            /* background-image: url("/bai/1.png");
+            background-size: cover; */
+            background-image: url(/long/1.png), url(/long/2.png);
+            background-size: 40%;
+            background-position: 0 100%, 100% 100%;
+            background-position: -12% 106%, 114% 106%;
+
+        }
+
+        .card:hover {
+            transform: scaleX(1.05);
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .swal2-html-container {
+            font-size: 1rem;
+        }
+
+        /* 在手机端设置 .box 的样式 */
+        @media (max-width: 600px) {
+            .box {
+                flex-direction: column;
+                /* 列表布局，一行一个卡片 */
+                align-items: center;
+                /* 居中显示 */
+                /* padding-top: 15rem; */
+
+            }
+
+            .card {
+                /* width: 100%; */
+                /* width: 45vh; */
+
+                /* 卡片宽度占满屏幕宽度 */
+                max-width: 600px;
+                /* 最大宽度，防止卡片过宽 */
+            }
+        }
+
+        footer {
+            width: 100%;
+            position: fixed;
+            z-index: 100;
+            bottom: 0;
+            left: 0;
+            height: 40px;
+            line-height: 40px;
+            font-size: 12px;
+            overflow: hidden;
+            color: darkgrey;
+            background-color: #fafafad9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">博客评论表情包</div>
+        <div class="title">
+            <a target="_blank" href="https://zl88.github.io">⚙️</a>
+        </div>
+    </header>
+    <div class="box">
+        <div class="card iq-card" onclick="showAlert('IQ表情包', '/iq/index.html')">
+            <h1>IQ表情包</h1>
+        </div>
+
+        <div class="card bai-card" onclick="showAlert('小白表情包', '/bai/index.html')">
+            <h1>小白表情包</h1>
+        </div>
+        <div class="card long-card" onclick="showAlert('小熊表情包', '/long/index.html')">
+            <h1>小熊表情包</h1>
+        </div>
+    </div>
+    <footer>
+        <p>仅作为博客评论学习使用，复制后请在24小时内删除！</p>
+    </footer>
+    <script src="//gcore.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <!-- <script src="
+        https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/limonte-sweetalert2/8.19.0/sweetalert2.all.min.js"></script> -->
+    <script>
+        function showAlert(packageName, link) {
+            Swal.fire({
+                title: packageName,
+                html: `点击前往跳转到 ${packageName}<i class="fa-fw fas fa-link"></i>`,
+                // padding: '0.5em 2em',
+                width: '20em',
+                background: '#ffffffcf  bottom right repeat ',
+                backdrop: `rgb(75 25 25 / 62%)`,
+                timer: 999999,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '前往',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 使用 window.open() 打开新窗口或标签页
+                    window.open(link, '_blank');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

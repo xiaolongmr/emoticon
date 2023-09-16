@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iq表情包</title>
+    <style>
+        /* CSS样式 */
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            /* 图片之间的间隔 */
+            justify-content: center;
+        }
+
+        img {
+            max-width: 200px;
+            max-height: 200px;
+            border: 2px solid #d2d2d2;
+            margin: 5px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            /* 图片的阴影效果 */
+            cursor: pointer;
+            /* 添加指针样式以指示图片可点击 */
+            transition: all .3s;
+        }
+
+        img:hover {
+            border: 2px solid #1bbb29;
+            box-shadow: 3px 3px 5px rgba(14, 128, 71, 0.3);
+        }
+
+        /* 提示框样式 */
+        .copy-success {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #66c066;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-container">
+        <!-- JavaScript将会在这里动态添加图片 -->
+    </div>
+    <div class="copy-success" id="copySuccess">
+        复制成功！快去博客评论吧。
+    </div>
+    <script>
+        // JavaScript脚本
+        document.addEventListener("DOMContentLoaded", function () {
+            const imageContainer = document.querySelector(".image-container");
+            const copySuccess = document.getElementById("copySuccess");
+
+            for (let i = 1; i <= 13; i++) {
+                const img = document.createElement("img");
+                img.src = `/iq/${i}.png`;
+                // img.src = `${i}.png`;
+                img.alt = `Image ${i}`;
+                img.addEventListener("click", function () {
+                    // 创建一个新的img元素
+                    const copiedImg = document.createElement("img");
+                    copiedImg.src = img.src;
+                    copiedImg.style.cssText = 'height: 2.25em!important;';
+                    // copiedImg.style = '.wl-content .vemoji, .wl-content .wl-emoji {height: 2.25em!important;}';
+                    copiedImg.className = "tk-owo-emotion  wl-emoji";
+
+                    // 将复制的图片添加到剪贴板
+                    const clipboard = navigator.clipboard;
+                    clipboard.writeText(copiedImg.outerHTML)
+                        .then(function () {
+                            console.log("图片已复制到剪贴板");
+                            // 显示复制成功提示框
+                            copySuccess.style.display = "block";
+
+                            // 隔一段时间后隐藏提示框
+                            setTimeout(function () {
+                                copySuccess.style.display = "none";
+                            }, 2000); // 2秒后隐藏
+                        })
+                        .catch(function (err) {
+                            console.error("复制图片失败: ", err);
+                        });
+                });
+                imageContainer.appendChild(img);
+            }
+
+        });
+    </script>
+</body>
+
+</html>
